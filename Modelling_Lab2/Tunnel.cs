@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace Modelling_Lab2
 {
-    public class Tunnel
+    public readonly struct Tunnel
     {
         /// <summary>
         /// Ширина туннеля
         /// </summary>
-        public double Width { get; set; }
+        public double Width { get; }
         /// <summary>
         /// Расстояние от начала туннеля до поворота
         /// </summary>
-        public double Height { get; set; }
+        public double Height { get; }
         /// <summary>
         /// Угол поворота
         /// </summary>
-        public double Angle { get; set; }
+        public double Angle { get; }
         /// <summary>
         /// Конструктор объекта класса Tunnel
         /// </summary>

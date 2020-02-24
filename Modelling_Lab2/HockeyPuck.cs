@@ -63,11 +63,8 @@ namespace Modelling_Lab2
         /// Передвигает шайбу в соответствии с ее текущей скоростью
         /// </summary>
         /// <param name="time">Промежуток времени</param>
-        public void ChangePosition(double time)
-        {
-            PositionX += CurrentSpeedX * time;
-            PositionY += CurrentSpeedY * time;
-        }
+        public void ChangePosition(double time) =>
+            (PositionX, PositionY) = (PositionX + CurrentSpeedX * time, PositionY + CurrentSpeedY * time);
         /// <summary>
         /// Устанавливает направления движения по значениям проекций скоростей
         /// </summary>
@@ -77,11 +74,11 @@ namespace Modelling_Lab2
             {
                 _directionX = -1;
             }
-            if (CurrentSpeedX > 0)
+            else if (CurrentSpeedX > 0)
             {
                 _directionX = 1;
             }
-            if (CurrentSpeedX == 0)
+            else if (CurrentSpeedX == 0)
             {
                 _directionX = 0;
             }
@@ -90,11 +87,11 @@ namespace Modelling_Lab2
             {
                 _directionY = -1;
             }
-            if (CurrentSpeedY > 0)
+            else if (CurrentSpeedY > 0)
             {
                 _directionY = 1;
             }
-            if (CurrentSpeedY == 0)
+            else if (CurrentSpeedY == 0)
             {
                 _directionY = 0;
             }
@@ -132,7 +129,6 @@ namespace Modelling_Lab2
         {
             if (IsEncountered(tunnel))
             {
-
                 //  1. Движемся снизу вверх слева направо
                 if (_directionX == 1 && _directionY == 1)
                 {
@@ -159,7 +155,7 @@ namespace Modelling_Lab2
                     }
                 }
                 //  2. Движемся снизу вверх справа налево
-                if (_directionX == -1 && _directionY == 1)
+                else if (_directionX == -1 && _directionY == 1)
                 {
                     //  Бьемся о верхнюю стенку
                     if (PositionY >= tunnel.Height)
@@ -191,7 +187,7 @@ namespace Modelling_Lab2
                     }
                 }
                 //  3. Движемся сверху вниз слева направо
-                if (_directionX == 1 && _directionY == -1)
+                else if (_directionX == 1 && _directionY == -1)
                 {
                     if (PositionY > tunnel.Height)
                     {
@@ -218,7 +214,7 @@ namespace Modelling_Lab2
                     }
                 }
                 //  4. Движемся сверху вниз справа налево
-                if (_directionX == -1 && _directionY == -1)
+                else if (_directionX == -1 && _directionY == -1)
                 {
                     if (PositionY > tunnel.Height)
                     {
@@ -245,22 +241,22 @@ namespace Modelling_Lab2
                     }
                 }
                 //  5. Движемся вертикально 
-                if (_directionX == 0 && _directionY == 1)
+                else if (_directionX == 0 && _directionY == 1)
                 {
                     CurrentAngle = 2 * tunnel.Angle - 90;
                 }
                 //  6. Движемся вертикально вниз
-                if (_directionX == 0 && _directionY == -1)
+                else if (_directionX == 0 && _directionY == -1)
                 {
                     CurrentAngle = 2 * tunnel.Angle - 90;
                 }
                 //  7. Движемся горизонтально вправо
-                if (_directionX == 1 && _directionY == 0)
+                else if (_directionX == 1 && _directionY == 0)
                 {
                     CurrentAngle = 2 * tunnel.Angle;
                 }
                 //  8. Движемся горизонтально влево
-                if (_directionX == -1 && _directionY == 0)
+                else if (_directionX == -1 && _directionY == 0)
                 {
                     CurrentAngle = 2 * tunnel.Angle;
                 }
@@ -279,6 +275,10 @@ namespace Modelling_Lab2
         {
             return (CurrentSpeed == 0) ? false : true;
         }
+        /// <summary>
+        /// Возвращает текущие координаты шайбы в формате "X; Y"
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return PositionX.ToString() + "; " + PositionY.ToString();
