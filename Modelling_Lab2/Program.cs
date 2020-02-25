@@ -8,6 +8,42 @@ namespace Modelling_Lab2
 {
     class Program
     {
+        private static readonly double _timeChange = 0.1;
+        /// <summary>
+        /// Проверяет, наступило ли время паузы или нет.
+        /// </summary>
+        /// <param name="requiredTime"></param>
+        /// <param name="totalTime"></param>
+        /// <returns>Возвращает true, если наступило время паузы, и false, если нет</returns>
+        static bool IsPause(double requiredTime, double totalTime) => requiredTime <= totalTime + _timeChange * 0.1 ? true : false;
+        /// <summary>
+        /// Обрабатывает наступление паузы
+        /// </summary>
+        /// <param name="puck">Шайба, учавствующая в эксперименте</param>
+        /// <param name="requiredTime">Время остановки</param>
+        /// <param name="totalTime">Текущее время</param>
+        static void CheckPause(HockeyPuck puck, ref double requiredTime, double totalTime)
+        {
+            Console.WriteLine($"Текущее время: {totalTime}c; {puck.ToString() + Environment.NewLine}Продолжить движение (Y) или выйти из программы(N)?.{Environment.NewLine}Введите Y или N: ");
+            if (Console.ReadLine().ToString() == "Y")
+            {
+                Console.WriteLine($"Текущее время: {totalTime}с. Введите новое время остановки (сек): ");
+                if (!double.TryParse(Console.ReadLine().ToString(), out requiredTime))
+                {
+                    Console.WriteLine("Некорректный ввод.");
+                    return;
+                }
+                if (requiredTime < totalTime)
+                {
+                    Console.WriteLine("Время новой остановки должно быть больше текущего.");
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
         static void Main()
         {
             try
@@ -106,12 +142,23 @@ namespace Modelling_Lab2
                         return;
                     }
 
+                    Console.WriteLine("Введите время паузы (сек): ");
+                    if (!double.TryParse(Console.ReadLine().ToString(), out double requiredTime))
+                    {
+                        Console.WriteLine("Некорректный ввод.");
+                        return;
+                    }
+                    if (requiredTime < 0)
+                    {
+                        Console.WriteLine("Время не может быть отрицательным.");
+                        return;
+                    }
                     Tunnel tunnel = new Tunnel(tunnelWidth, tunnelHeight, tunnelAngle);
                     HockeyPuck puck = new HockeyPuck(mass, speed, angle, startX);
 
 
                     //  Минимальный промежуток времени
-                    double timeChange = 0.1, totalTime = 0;
+                    double totalTime = 0;
 
                     //  Цикл движения: 
                     //  1)  Проверяем столкновение -> Изменяем направление движения и угол, если столкнулись со стеной ->
@@ -120,21 +167,26 @@ namespace Modelling_Lab2
                     //  4)  Подсчитываем общее время
                     while (puck.IsMoving())
                     {
-                        puck.CheckEncounter(tunnel);
-                        puck.ChangePosition(timeChange);
-                        puck.SlowDown(timeChange);
+                        if (IsPause(requiredTime, totalTime))
+                        {
+                            CheckPause(puck, ref requiredTime, totalTime);
+                        }
 
-                        totalTime += timeChange;
+                        puck.CheckEncounter(tunnel);
+                        puck.ChangePosition(_timeChange);
+                        puck.SlowDown(_timeChange);
+
+                        totalTime += _timeChange;
                     }
 
                     Console.WriteLine($"Шайба остановилась через {totalTime}." +
                         $"Результирующие координаты: {puck.GetCoordinates()}.");
 
-                    Console.WriteLine("Повторить? (Y/N)");
+                    Console.WriteLine("Повторить эксперимент? (Y/N)");
                     repeat = (Console.ReadLine().ToString() == "Y") ? true : false;
 
                 } while (repeat);
-                
+
             }
             catch (Exception ex)
             {

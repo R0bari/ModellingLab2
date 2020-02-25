@@ -333,11 +333,11 @@ namespace Modelling_Lab2
         /// Возвращает текущие координаты и линейную скорость
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => ("Координаты: " + PositionX.ToString() + "; " + PositionY.ToString() + "; Линейная скорость: " + CurrentSpeed.ToString());
+        public override string ToString() => "Координаты: " + PositionX.ToString() + "; " + PositionY.ToString() + "; Линейная скорость: " + CurrentSpeed.ToString();
         /// <summary>
         /// Возвращает текущие координаты в формате "X; Y"
         /// </summary>
         /// <returns></returns>
-        public string GetCoordinates() => (PositionX.ToString() + "; " + PositionY.ToString());
+        public string GetCoordinates() => PositionX.ToString() + "; " + PositionY.ToString();
     }
 }
