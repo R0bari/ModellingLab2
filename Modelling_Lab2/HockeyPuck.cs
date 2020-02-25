@@ -128,10 +128,10 @@ namespace Modelling_Lab2
             (CurrentSpeedX, CurrentSpeedY) = 
             (CurrentSpeed * Math.Cos(CurrentAngle * (Math.PI / 180)), CurrentSpeed * Math.Sin(CurrentAngle * (Math.PI / 180)));
         /// <summary>
-        /// Проверяет наличие столкновения шайбы с одной из стенок туннеля. Возвращает
-        /// true, если шайба коснулась стенки, и false, если шайба не коснулась стенки.
+        /// Проверяет наличие столкновения шайбы с одной из стенок туннеля. 
         /// </summary>
         /// <param name="tunnel">Туннель, в котором движется данная шайба</param>
+        /// <returns>Возвращает true, если шайба коснулась стенки, и false, если шайба не коснулась стенки.</returns>
         private bool IsEncountered(Tunnel tunnel)
         {
             //  Если еще не дошли до поворота
@@ -325,10 +325,11 @@ namespace Modelling_Lab2
             }
         }
         /// <summary>
-        /// Проверяет, движется шайба или нет. Возвращает true, если скорость не равна нулю, 
-        /// и false, если скорость равна нулю.
+        /// Проверяет, движется шайба или нет.
         /// </summary>
-        public bool IsMoving() => ((CurrentSpeed > 0) ? true : false);
+        /// <returns>Возвращает true, если скорость не равна нулю, 
+        /// и false, если скорость равна нулю.</returns>
+        public bool IsMoving() => (CurrentSpeed > 0) ? true : false;
         /// <summary>
         /// Возвращает текущие координаты и линейную скорость
         /// </summary>

@@ -26,11 +26,6 @@ namespace Modelling_Lab2
         /// <param name="L">Толщина туннеля</param>
         /// <param name="H">Расстояние от начала пути до поворота</param>
         /// <param name="angle">Угол поворота</param>
-        public Tunnel(double L, double H, double angle)
-        {
-            Width = L;
-            Height = H;
-            Angle = angle;
-        }
+        public Tunnel(double L, double H, double angle) => (Width, Height, Angle) = (L, H, angle);
     }
 }
