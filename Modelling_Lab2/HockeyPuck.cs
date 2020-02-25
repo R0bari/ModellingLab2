@@ -155,7 +155,7 @@ namespace Modelling_Lab2
                 //  1. Движемся снизу вверх слева направо
                 if (_directionX == 1 && _directionY == 1)
                 {
-                    if (PositionY >= tunnel.Height)
+                    if (PositionY >= tunnel.Height && tunnel.Angle != 90)
                     {
                         //  1.1.    Бьемся о верхнюю стенку
                         if (CurrentAngle > tunnel.Angle)
@@ -181,7 +181,7 @@ namespace Modelling_Lab2
                 else if (_directionX == -1 && _directionY == 1)
                 {
                     //  Бьемся о верхнюю стенку
-                    if (PositionY >= tunnel.Height)
+                    if (PositionY >= tunnel.Height && tunnel.Angle != 90)
                     {
                         //  2.1.    Отскакиваем вниз левее
                         if (CurrentAngle + tunnel.Angle > 180)
@@ -212,7 +212,7 @@ namespace Modelling_Lab2
                 //  3. Движемся сверху вниз слева направо
                 else if (_directionX == 1 && _directionY == -1)
                 {
-                    if (PositionY > tunnel.Height)
+                    if (PositionY > tunnel.Height && tunnel.Angle != 90)
                     {
                         //  3.1.    Движемся вниз вправо
                         if (360 - CurrentAngle + tunnel.Angle > 90)
@@ -239,7 +239,7 @@ namespace Modelling_Lab2
                 //  4. Движемся сверху вниз справа налево
                 else if (_directionX == -1 && _directionY == -1)
                 {
-                    if (PositionY > tunnel.Height)
+                    if (PositionY > tunnel.Height && tunnel.Angle != 90)
                     {
                         //  4.1.    Движемся вниз вправо 
                         if (CurrentAngle + tunnel.Angle < 90)
@@ -297,7 +297,7 @@ namespace Modelling_Lab2
         /// </summary>
         private void SetCurrentCoordinate(Tunnel tunnel)
         {
-            if (PositionY < tunnel.Height)
+            if (PositionY < tunnel.Height || tunnel.Angle == 90)
             {
                 //  Если бьемся о левую стенку
                 if (PositionX >= tunnel.Width) {
@@ -330,9 +330,14 @@ namespace Modelling_Lab2
         /// </summary>
         public bool IsMoving() => ((CurrentSpeed > 0) ? true : false);
         /// <summary>
-        /// Возвращает текущие координаты и линейную скорость шайбы в формате "X; Y; V"
+        /// Возвращает текущие координаты и линейную скорость
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => (PositionX.ToString() + "; " + PositionY.ToString() + "; " + CurrentSpeed.ToString());
+        public override string ToString() => ("Координаты: " + PositionX.ToString() + "; " + PositionY.ToString() + "; Линейная скорость: " + CurrentSpeed.ToString());
+        /// <summary>
+        /// Возвращает текущие координаты в формате "X; Y"
+        /// </summary>
+        /// <returns></returns>
+        public string GetCoordinates() => (PositionX.ToString() + "; " + PositionY.ToString());
     }
 }

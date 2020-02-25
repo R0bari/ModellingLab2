@@ -128,7 +128,7 @@ namespace Modelling_Lab2
                     }
 
                     Console.WriteLine($"Шайба остановилась через {totalTime}." +
-                        $"Результирующие координаты: {puck.ToString()}.");
+                        $"Результирующие координаты: {puck.GetCoordinates()}.");
 
                     Console.WriteLine("Повторить? (Y/N)");
                     repeat = (Console.ReadLine().ToString() == "Y") ? true : false;
