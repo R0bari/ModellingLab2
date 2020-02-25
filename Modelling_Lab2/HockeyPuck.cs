@@ -135,9 +135,9 @@ namespace Modelling_Lab2
         private bool IsEncountered(Tunnel tunnel)
         {
             //  Если еще не дошли до поворота
-            if (PositionY < tunnel.Height)
+            if (PositionY < tunnel.Height || tunnel.Angle == 90)
             {
-                return (PositionY != 0 && (PositionX >= tunnel.Width || PositionX <= 0));
+                return ((PositionX >= tunnel.Width || PositionX <= 0) && PositionY != 0);
             }
             //  Если уже вошли в поворот
             else
