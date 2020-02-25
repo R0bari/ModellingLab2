@@ -124,11 +124,9 @@ namespace Modelling_Lab2
         /// <summary>
         /// Устанавливает проекции скоростей по значению линейной скорости
         /// </summary>
-        private void CheckSpeed()
-        {
-            CurrentSpeedX = CurrentSpeed * Math.Cos(CurrentAngle * (Math.PI / 180));
-            CurrentSpeedY = CurrentSpeed * Math.Sin(CurrentAngle * (Math.PI / 180));
-        }
+        private void CheckSpeed() => 
+            (CurrentSpeedX, CurrentSpeedY) = 
+            (CurrentSpeed * Math.Cos(CurrentAngle * (Math.PI / 180)), CurrentSpeed * Math.Sin(CurrentAngle * (Math.PI / 180)));
         /// <summary>
         /// Проверяет наличие столкновения шайбы с одной из стенок туннеля. Возвращает
         /// true, если шайба коснулась стенки, и false, если шайба не коснулась стенки.
@@ -330,17 +328,11 @@ namespace Modelling_Lab2
         /// Проверяет, движется шайба или нет. Возвращает true, если скорость не равна нулю, 
         /// и false, если скорость равна нулю.
         /// </summary>
-        public bool IsMoving()
-        {
-            return (CurrentSpeed > 0) ? true : false;
-        }
+        public bool IsMoving() => ((CurrentSpeed > 0) ? true : false);
         /// <summary>
         /// Возвращает текущие координаты и линейную скорость шайбы в формате "X; Y; V"
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
-        {
-            return PositionX.ToString() + "; " + PositionY.ToString() + "; " + CurrentSpeed.ToString();
-        }
+        public override string ToString() => (PositionX.ToString() + "; " + PositionY.ToString() + "; " + CurrentSpeed.ToString());
     }
 }
