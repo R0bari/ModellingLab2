@@ -332,15 +332,15 @@ namespace Modelling_Lab2
         /// </summary>
         public bool IsMoving()
         {
-            return (CurrentSpeed >= 0) ? false : true;
+            return (CurrentSpeed > 0) ? true : false;
         }
         /// <summary>
-        /// Возвращает текущие координаты шайбы в формате "X; Y"
+        /// Возвращает текущие координаты и линейную скорость шайбы в формате "X; Y; V"
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return PositionX.ToString() + "; " + PositionY.ToString();
+            return PositionX.ToString() + "; " + PositionY.ToString() + "; " + CurrentSpeed.ToString();
         }
     }
 }
