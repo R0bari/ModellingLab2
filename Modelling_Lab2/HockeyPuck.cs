@@ -8,7 +8,10 @@ namespace Modelling_Lab2
 {
     public class HockeyPuck
     {
-        private static readonly double _g = 9.8;
+        /// <summary>
+        /// Ускорение свободного падения
+        /// </summary>
+        private static readonly double g = 9.8;
         /// <summary>
         /// Направление движения по оси X. -1 - влево, 1 - вправо, 0 - если координата X не изменяется.
         /// </summary>
@@ -17,12 +20,33 @@ namespace Modelling_Lab2
         /// Направление движения по оси Y. -1 - вниз, 1 - вверх, 0 - если координата Y не изменяется.
         /// </summary>
         private int _directionY;
+        /// <summary>
+        /// Масса шайбы
+        /// </summary>
         public double Mass { get; set; }
+        /// <summary>
+        /// Текущая координата шайбы по оси X
+        /// </summary>
         public double PositionX { get; set; }
+        /// <summary>
+        /// Текущая координата шайбы по оси Y
+        /// </summary>
         public double PositionY { get; set; }
+        /// <summary>
+        /// Текущая линейная скорость шайбы
+        /// </summary>
         public double CurrentSpeed { get; set; }
+        /// <summary>
+        /// Значение проекции линейной скорости шайбы на ось X
+        /// </summary>
         public double CurrentSpeedX { get; set; }
+        /// <summary>
+        /// Значение проекции линейной скорости шайбы на ось Y
+        /// </summary>
         public double CurrentSpeedY { get; set; }
+        /// <summary>
+        /// Текущий угол движения шайбы
+        /// </summary>
         public double CurrentAngle { get; set; }
         /// <summary>
         /// Конструктор объекта класса HockeyPuck
@@ -50,12 +74,13 @@ namespace Modelling_Lab2
         public void SlowDown(double time)
         {
             // Fтр = мю * N = мю*m*g
-            double frictionForce = 0.035 * Mass * _g;
+            double frictionForce = 0.035 * Mass * g;
             CurrentSpeed -= frictionForce * time;
             if (CurrentSpeed < 0)
             {
                 CurrentSpeed = 0;
             }
+
             CurrentSpeedX = CurrentSpeed * Math.Cos(CurrentAngle * (Math.PI / 180));
             CurrentSpeedY = CurrentSpeed * Math.Sin(CurrentAngle * (Math.PI / 180));
         }
@@ -183,7 +208,7 @@ namespace Modelling_Lab2
                     else
                     {
                         //  Вычисляем новый угол движения
-                        CurrentAngle -= 180;
+                        CurrentAngle -= 90;
                     }
                 }
                 //  3. Движемся сверху вниз слева направо
@@ -261,10 +286,44 @@ namespace Modelling_Lab2
                     CurrentAngle = 2 * tunnel.Angle;
                 }
 
+                //  Если координаты шайбы вышли за стенки туннеля, изменяем их
+                SetCurrentCoordinate(tunnel);
                 //  Заново высчитываем скорость по осям
                 CheckSpeed();
                 //  Проверяем, как изменилось направление движения
                 CheckDirection();
+            }
+        }
+        /// <summary>
+        /// Устанавливает корректные координаты после столкновения
+        /// </summary>
+        private void SetCurrentCoordinate(Tunnel tunnel)
+        {
+            if (PositionY < tunnel.Height)
+            {
+                //  Если бьемся о левую стенку
+                if (PositionX >= tunnel.Width) {
+                    PositionX = tunnel.Width;
+                }
+                //  Если бьемся о правую стенку
+                else if (PositionX <= 0)
+                {
+                    PositionX = 0;
+                }
+            }
+            else
+            {
+                double tan = Math.Tan(tunnel.Angle * Math.PI / 180);
+                //  Если бьемся о верхнюю стенку
+                if (PositionY >= tunnel.Height + PositionX * tan)
+                {
+                    PositionY = tunnel.Height + PositionX * tan;
+                }
+                //  Если бьемся о нижнюю стенку
+                else if (PositionY <= tunnel.Height + (PositionX - tunnel.Width) * tan)
+                {
+                    PositionY = tunnel.Height + (PositionX - tunnel.Width) * tan;
+                }
             }
         }
         /// <summary>
@@ -273,7 +332,7 @@ namespace Modelling_Lab2
         /// </summary>
         public bool IsMoving()
         {
-            return (CurrentSpeed == 0) ? false : true;
+            return (CurrentSpeed >= 0) ? false : true;
         }
         /// <summary>
         /// Возвращает текущие координаты шайбы в формате "X; Y"
