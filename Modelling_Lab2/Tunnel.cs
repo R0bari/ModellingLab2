@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modelling_Lab2
 {
-    public readonly struct Tunnel
+    public struct Tunnel
     {
         /// <summary>
         /// Ширина туннеля

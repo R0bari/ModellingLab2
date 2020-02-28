@@ -41,6 +41,7 @@ namespace Modelling_Lab2
             }
             else
             {
+                requiredTime = double.MaxValue;
                 return;
             }
         }

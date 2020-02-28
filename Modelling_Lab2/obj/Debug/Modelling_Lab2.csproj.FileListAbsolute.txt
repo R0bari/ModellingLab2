@@ -4,3 +4,10 @@ C:\Users\Eugene\source\repos\Modelling\Modelling_Lab2\Modelling_Lab2\bin\Debug\M
 C:\Users\Eugene\source\repos\Modelling\Modelling_Lab2\Modelling_Lab2\obj\Debug\Modelling_Lab2.csprojAssemblyReference.cache
 C:\Users\Eugene\source\repos\Modelling\Modelling_Lab2\Modelling_Lab2\obj\Debug\Modelling_Lab2.exe
 C:\Users\Eugene\source\repos\Modelling\Modelling_Lab2\Modelling_Lab2\obj\Debug\Modelling_Lab2.pdb
+D:\GitHub\ModellingLab2\Modelling_Lab2\obj\Debug\Modelling_Lab2.csprojAssemblyReference.cache
+D:\GitHub\ModellingLab2\Modelling_Lab2\obj\Debug\Modelling_Lab2.csproj.CoreCompileInputs.cache
+D:\GitHub\ModellingLab2\Modelling_Lab2\obj\Debug\Modelling_Lab2.exe
+D:\GitHub\ModellingLab2\Modelling_Lab2\obj\Debug\Modelling_Lab2.pdb
+D:\GitHub\ModellingLab2\Modelling_Lab2\bin\Debug\Modelling_Lab2.exe.config
+D:\GitHub\ModellingLab2\Modelling_Lab2\bin\Debug\Modelling_Lab2.exe
+D:\GitHub\ModellingLab2\Modelling_Lab2\bin\Debug\Modelling_Lab2.pdb
