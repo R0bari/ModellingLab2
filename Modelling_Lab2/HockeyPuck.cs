@@ -206,7 +206,7 @@ namespace Modelling_Lab2
                     else
                     {
                         //  Вычисляем новый угол движения
-                        CurrentAngle -= 90;
+                        CurrentAngle = 180 - CurrentAngle;
                     }
                 }
                 //  3. Движемся сверху вниз слева направо
